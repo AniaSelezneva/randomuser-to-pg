@@ -14,3 +14,4 @@ PORT=5432`
 * Клонируйте репозиторий проекта с GitHub: `https://github.com/AniaSelezneva/randomuser-to-pg.git`
 * Установите зависимости: `npm i`
 * Запустите сервер: `npm start`
+* Приложение доступно по адресу: `http://localhost:3000/`
