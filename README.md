@@ -1,7 +1,7 @@
 # Randomuser.me API Integration with PostgreSQL
 
 Приложение получает данные c API https://randomuser.me/api/, 
-записывает их в таблицу Users базы данных users_db.
+записывает их в таблицу users базы данных users_db.
 
 Необходимые переменные окружения:
 `USER=postgres
