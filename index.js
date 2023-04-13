@@ -15,7 +15,7 @@ let pool;
 
 const dbName = "users_db";
 
-async function createDbIfNotExists() {
+async function createDbAndTable() {
   try {
     const res = await client.query(
       `SELECT datname FROM pg_catalog.pg_database WHERE datname = '${dbName}'`
@@ -27,8 +27,6 @@ async function createDbIfNotExists() {
     } else {
       console.log(`Database "${dbName}" already exists`);
     }
-
-    await client.end();
 
     pool = new Pool({
       user: process.env.USER,
@@ -75,10 +73,11 @@ async function createDbIfNotExists() {
         picture_thumbnail TEXT,
         nat TEXT
       );`);
-    console.log("Tables created successfully");
+    console.log("Tables created successfully (if didn't exist)");
   } catch (err) {
+    throw err;
+  } finally {
     await client.end();
-    console.error(err);
   }
 }
 
@@ -206,7 +205,7 @@ app.get("/", async (_, res) => {
 
 (async () => {
   try {
-    await createDbIfNotExists();
+    await createDbAndTable();
     app.listen(3000, () => {
       console.log("Server started on port 3000");
     });
